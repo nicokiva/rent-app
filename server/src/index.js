@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 app.use(express.json());
+app.use(cors());
 const port = 8080;
 
 const reservations = [];
@@ -21,7 +23,7 @@ app.post("/reservations", (req, res) => {
 });
 
 app.get("/reservations", (req, res) => {
-  res.json(reservations);
+  res.json(reservations.map(({ vehicleId, userId, from, to }) => ({ vehicleId, userId, from, to })));
 });
 
 app.listen(port, () => {
