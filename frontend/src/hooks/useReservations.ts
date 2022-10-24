@@ -1,5 +1,5 @@
 export type BaseReservationType = {
-  id: number;
+  id?: number;
   userId: string;
   vehicleId: string;
   from: string;
@@ -26,8 +26,27 @@ const getAll: () => Promise<BaseReservationType | null> = async () => {
   return response.json();
 };
 
-export const useReservations: () => [() => Promise<BaseReservationType | null>, () => void] = () => {
-  const set = () => {};
+const set: (reservation: FullReservationType) => Promise<boolean> = async (reservation) => {
+  try {
+    await fetch(`${HOST}/reservations`, {
+      method: "post",
+      body: JSON.stringify(reservation),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
 
-  return [getAll, set];
+type useReservationsType = {
+  getAll: () => Promise<BaseReservationType | null>;
+  set: (reservation: FullReservationType) => Promise<boolean>;
+};
+
+export const useReservations: () => useReservationsType = () => {
+  return { getAll, set };
 };
