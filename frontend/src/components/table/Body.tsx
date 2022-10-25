@@ -1,8 +1,12 @@
 import { TableRow, TableCell, CircularProgress } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface BodyProps {
   data: Array<{ [key: string]: string | number }> | null | undefined;
   columnSize: number;
+  onClickEdit: (id: string) => void;
+  onClickDelete: (id: string) => void;
 }
 
 const EmptyBody = ({ children, columnSize }: { children: JSX.Element | string; columnSize: number }) => {
@@ -15,7 +19,7 @@ const EmptyBody = ({ children, columnSize }: { children: JSX.Element | string; c
   );
 };
 
-export const Body = ({ data, ...props }: BodyProps): JSX.Element => {
+export const Body = ({ data, onClickDelete, onClickEdit, ...props }: BodyProps): JSX.Element => {
   if (data === undefined) {
     return (
       <EmptyBody {...props}>
@@ -37,9 +41,17 @@ export const Body = ({ data, ...props }: BodyProps): JSX.Element => {
       {data.map((row) => {
         return (
           <TableRow key={row.id}>
-            {Object.keys(row).map((key) => (
-              <TableCell>{row[key]}</TableCell>
-            ))}
+            {Object.keys(row)
+              .filter((key) => key !== "id")
+              .map((key, index) => (
+                <TableCell key={`${row.id}-${index}`}>{row[key]}</TableCell>
+              ))}
+            <TableCell>
+              <EditIcon style={{ cursor: "pointer" }} onClick={() => onClickEdit(row.id.toString())} />
+            </TableCell>
+            <TableCell>
+              <DeleteIcon style={{ cursor: "pointer" }} onClick={() => onClickDelete(row.id.toString())} />
+            </TableCell>
           </TableRow>
         );
       })}

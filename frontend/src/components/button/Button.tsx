@@ -3,5 +3,5 @@ import { Button as ButtonBase, ButtonProps as ButtonBaseProps } from "@mui/mater
 export type ButtonProps = ButtonBaseProps;
 
 export const Button = (props: ButtonBaseProps): JSX.Element => {
-  return <ButtonBase {...props} />;
+  return <ButtonBase variant='contained' {...props} />;
 };

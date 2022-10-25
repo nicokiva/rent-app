@@ -1,16 +1,18 @@
 import FormControl from "../form";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Add from "../button/add";
 import Checkbox from "../checkbox";
 import Input from "../input";
 import { FullReservationType } from "../../hooks/useReservations";
+import Button from "../button";
 
 interface AddEditFormProps {
   onSubmit: (reservation: FullReservationType) => void;
+  reservation?: FullReservationType;
 }
 
-export const AddEditForm = ({ onSubmit }: AddEditFormProps): JSX.Element => {
+export const AddEditForm = ({ onSubmit, reservation }: AddEditFormProps): JSX.Element => {
   const [vehicleId, setVehicleId] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [from, setFrom] = useState<string>("");
@@ -45,6 +47,18 @@ export const AddEditForm = ({ onSubmit }: AddEditFormProps): JSX.Element => {
     onSubmit({ vehicleId, userId, from, to, needFullGas });
   };
 
+  useEffect(() => {
+    if (!reservation) {
+      return;
+    }
+
+    setVehicleId(reservation.vehicleId);
+    setUserId(reservation.userId);
+    setFrom(reservation.from);
+    setTo(reservation.to);
+    setNeedFullGas(reservation.needFullGas);
+  }, [JSON.stringify(reservation)]);
+
   return (
     <FormControl>
       <Grid style={{ marginBottom: "20px" }} container spacing={2}>
@@ -64,7 +78,9 @@ export const AddEditForm = ({ onSubmit }: AddEditFormProps): JSX.Element => {
           <Checkbox label='Need full gas?' checked={needFullGas} onChange={handleChangeNeedFullGas as any} />
         </Grid>
       </Grid>
-      <Add type='submit' onClick={handleClick} />
+      <Button type='submit' onClick={handleClick}>
+        Submit
+      </Button>
     </FormControl>
   );
 };

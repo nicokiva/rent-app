@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddEditForm from "../../components/addEditForm";
-import { Error, Success } from "../../components/toast";
+import { Error } from "../../components/toast";
 import { FullReservationType, useReservations } from "../../hooks/useReservations";
 
 interface AddProps {}
@@ -18,16 +18,13 @@ export const Add = ({}: AddProps): JSX.Element => {
       return;
     }
 
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    navigate("/");
   };
 
   return (
     <>
       <AddEditForm onSubmit={handleSubmitForm} />
       {addResult === false && <Error />}
-      {addResult === true && <Success />}
     </>
   );
 };
