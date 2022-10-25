@@ -74,13 +74,22 @@ export const AddEditForm = ({ onSubmit, reservation }: AddEditFormProps): JSX.El
         <Grid item xs={12} sm={6}>
           <Input type='text' onChange={handleChangeTo} value={to} label='To' />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <Checkbox label='Need full gas?' checked={needFullGas} onChange={handleChangeNeedFullGas as any} />
         </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Button variant='outlined' type='submit' onClick={handleClick}>
+            Back
+          </Button>
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <Button type='submit' onClick={handleClick}>
+            Submit
+          </Button>
+        </Grid>
       </Grid>
-      <Button type='submit' onClick={handleClick}>
-        Submit
-      </Button>
     </FormControl>
   );
 };

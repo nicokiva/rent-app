@@ -51,7 +51,7 @@ export const List: () => JSX.Element = () => {
         onClickEdit={handleClickEdit}
       />
 
-      <section style={{ textAlign: "right", marginRight: "50px", marginTop: "20px" }}>
+      <section style={{ textAlign: "right", marginTop: "20px" }}>
         <Add onClick={handleAddClick} />
       </section>
       {removeResult === false && <Error />}

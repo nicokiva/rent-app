@@ -4,7 +4,7 @@ import { ButtonProps } from "../Button";
 
 export const Add = (props: ButtonProps): JSX.Element => {
   return (
-    <Button variant='contained' {...props}>
+    <Button style={{ width: "100px" }} variant='contained' {...props}>
       <AddIcon />
     </Button>
   );
