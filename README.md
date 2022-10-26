@@ -19,4 +19,14 @@ There are two apps to start:
 
 ## Testing
 
-Unit tests are only available in client side.
+Both unit tests and e2e are only available in client side and both are developed using Cypress library. The reason for running both with Cypress is to have a single library and location for all of them.
+To run e2e tests: `npm run it`.
+To run unit tess: `npm run ut`.
+
+# Nice to have but could not make
+
+- More tests: the more, the better.
+- Pagination in the table.
+- To persist data somwhere in the server.
+- To add some kind of cache in client side so it is not required to go to backend every time.
+- A better design.
