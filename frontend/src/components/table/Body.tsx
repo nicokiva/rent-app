@@ -40,11 +40,13 @@ export const Body = ({ data, onClickDelete, onClickEdit, ...props }: BodyProps):
     <>
       {data.map((row) => {
         return (
-          <TableRow key={row.id}>
+          <TableRow key={row.id} className={`reservation-${row.id}`}>
             {Object.keys(row)
               .filter((key) => key !== "id")
               .map((key, index) => (
-                <TableCell key={`${row.id}-${index}`}>{row[key]}</TableCell>
+                <TableCell className={key} key={`${row.id}-${index}`}>
+                  {row[key]}
+                </TableCell>
               ))}
             <TableCell>
               <EditIcon style={{ cursor: "pointer" }} onClick={() => onClickEdit(row.id.toString())} />

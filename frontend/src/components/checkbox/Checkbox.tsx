@@ -5,10 +5,14 @@ interface CheckboxProps {
   label: string;
   checked: boolean;
   onChange: () => void;
+  className?: string;
 }
 
-export const Checkbox = ({ label, checked, onChange }: CheckboxProps): JSX.Element => {
+export const Checkbox = ({ className, label, checked, onChange }: CheckboxProps): JSX.Element => {
   return (
-    <FormControlLabel control={<CheckboxBase checked={checked} size='small' onChange={onChange} />} label={label} />
+    <FormControlLabel
+      control={<CheckboxBase className={className} checked={checked} size='small' onChange={onChange} />}
+      label={label}
+    />
   );
 };

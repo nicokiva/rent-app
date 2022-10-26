@@ -4,8 +4,7 @@ import AddEditForm from "../../components/addEditForm";
 import { Error } from "../../components/toast";
 import { FullReservationType, useReservations } from "../../hooks/useReservations";
 
-interface EditProps {}
-export const Edit = ({}: EditProps): JSX.Element => {
+export const Edit = (): JSX.Element => {
   const [reservation, setReservation] = useState<FullReservationType>();
   const { reservationId } = useParams();
   const { getById, update } = useReservations();

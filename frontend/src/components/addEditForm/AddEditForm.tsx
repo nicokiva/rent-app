@@ -1,7 +1,6 @@
 import FormControl from "../form";
 import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
-import Add from "../button/add";
 import Checkbox from "../checkbox";
 import Input from "../input";
 import { FullReservationType } from "../../hooks/useReservations";
@@ -57,29 +56,40 @@ export const AddEditForm = ({ onSubmit, reservation }: AddEditFormProps): JSX.El
     setFrom(reservation.from);
     setTo(reservation.to);
     setNeedFullGas(reservation.needFullGas);
-  }, [JSON.stringify(reservation)]);
+  }, [reservation]);
 
   return (
     <FormControl>
       <Grid style={{ marginBottom: "20px" }} container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Input type='number' onChange={handleChangeVehicleId} value={vehicleId} label='Vehicle Id' />
+          <Input
+            className='vehicle-id'
+            type='number'
+            onChange={handleChangeVehicleId}
+            value={vehicleId}
+            label='Vehicle Id'
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Input type='number' onChange={handleChangeUserId} value={userId} label='User Id' />
+          <Input className='user-id' type='number' onChange={handleChangeUserId} value={userId} label='User Id' />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Input type='text' onChange={handleChangeFrom} value={from} label='From' />
+          <Input className='from' type='text' onChange={handleChangeFrom} value={from} label='From' />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Input type='text' onChange={handleChangeTo} value={to} label='To' />
+          <Input className='to' type='text' onChange={handleChangeTo} value={to} label='To' />
         </Grid>
         <Grid item xs={12}>
-          <Checkbox label='Need full gas?' checked={needFullGas} onChange={handleChangeNeedFullGas as any} />
+          <Checkbox
+            className='need-full-gas'
+            label='Need full gas?'
+            checked={needFullGas}
+            onChange={handleChangeNeedFullGas as any}
+          />
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Button variant='outlined' type='submit' onClick={handleClick}>
+          <Button variant='outlined' onClick={handleClick}>
             Back
           </Button>
         </Grid>
